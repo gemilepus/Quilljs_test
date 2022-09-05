@@ -6,3 +6,9 @@
 * Clone
 * `cd projectpath`
 * `composer install`
+
+### Include ###
+
+* quill
+* quill-better-table
+
