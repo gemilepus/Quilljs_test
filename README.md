@@ -1,10 +1,11 @@
 # 
 ![alt text?](cover.png)
+Saving and Retrieving Quill Data
+
 
 ### Installation ###
 
 * Clone
-* `cd projectpath`
 * `composer install`
 
 ### Include ###
