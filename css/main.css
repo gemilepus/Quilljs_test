@@ -556,6 +556,14 @@
   display: none;
 }
 
+.ql-container{
+    height: auto !important;
+    min-height: 60%;
+}
+
+.ql-editor {
+    height: auto !important;
+}
 
 .ql-toolbar{
     width: 100%;
