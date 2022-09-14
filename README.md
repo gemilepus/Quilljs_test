@@ -11,5 +11,5 @@ Saving and Retrieving Quill Data
 ### Include ###
 
 * quill
-* quill-better-table
+* [quill-better-table](https://github.com/soccerloway/quill-better-table)
 
