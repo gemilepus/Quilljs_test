@@ -12,4 +12,5 @@ Saving and Retrieving Quill Data
 
 * quill
 * [quill-better-table](https://github.com/soccerloway/quill-better-table)
+* [DynamicQuillTools](https://github.com/T-vK/DynamicQuillTools)
 
