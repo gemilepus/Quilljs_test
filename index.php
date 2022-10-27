@@ -21,6 +21,7 @@
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/quill/2.0.0-dev.3/quill.min.js" type="text/javascript"></script>
     <script src="js/quill-better-table-1.2.10.min.js" type="text/javascript"></script>
+    <script src="https://cdn.jsdelivr.net/gh/T-vK/DynamicQuillTools@master/DynamicQuillTools.js"></script>
 </head>
 <?php
 require 'vendor/autoload.php';
@@ -53,11 +54,8 @@ require 'vendor/autoload.php';
 
                         <nav style="display: flex;justify-content: space-between;">
 
-                            <div class="nav nav-tabs" id="nav-tab" role="tablist"
-                                style="overflow-x: auto;overflow-y: hidden;flex-wrap: nowrap;margin-right: 10%">
-                                <button class="nav-link active" id="nav-home-tab" data-bs-toggle="tab"
-                                    data-bs-target="#nav-home" type="button" role="tab" aria-controls="nav-home"
-                                    aria-selected="true">{{ ItemName }}</button>
+                            <div class="nav nav-tabs" id="nav-tab" role="tablist" style="overflow-x: auto;overflow-y: hidden;flex-wrap: nowrap;margin-right: 10%">
+                                <button class="nav-link active" id="nav-home-tab" data-bs-toggle="tab" data-bs-target="#nav-home" type="button" role="tab" aria-controls="nav-home" aria-selected="true">{{ ItemName }}</button>
 
                             </div>
 
@@ -65,8 +63,7 @@ require 'vendor/autoload.php';
 
                         </nav>
                         <div class="tab-content" id="nav-tabContent">
-                            <div class="tab-pane fade show active" id="nav-home" role="tabpanel"
-                                aria-labelledby="nav-home-tab">
+                            <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
                                 <table class="table">
                                     <thead>
                                     </thead>
@@ -77,10 +74,8 @@ require 'vendor/autoload.php';
                                     </tbody>
                                 </table>
                             </div>
-                            <div class="tab-pane fade" id="nav-profile" role="tabpanel"
-                                aria-labelledby="nav-profile-tab">...</div>
-                            <div class="tab-pane fade" id="nav-contact" role="tabpanel"
-                                aria-labelledby="nav-contact-tab">...</div>
+                            <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">...</div>
+                            <div class="tab-pane fade" id="nav-contact" role="tabpanel" aria-labelledby="nav-contact-tab">...</div>
                         </div>
 
                     </ul>
@@ -98,47 +93,37 @@ require 'vendor/autoload.php';
                     </nav>
 
                     <!-- Modal -->
-                    <div class="modal" id="QuillModal" tabindex="99999" aria-labelledby="QuillModalLabel"
-                        aria-hidden="true" data-bs-backdrop="false">
+                    <div class="modal" id="QuillModal" tabindex="99999" aria-labelledby="QuillModalLabel" aria-hidden="true" data-bs-backdrop="false">
                         <div class="modal-dialog modal-fullscreen">
                             <div class="modal-content">
                                 <div class="modal-header">
                                     <h5 class="modal-title" id="QuillModalLabel"></h5>
-                                    <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                        aria-label="Close"></button>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                 </div>
                                 <div class="modal-body">
 
-                                    <div class="form-group" v-if="!isRead"
-                                        style="width: 100%;max-width: 960px;margin: 0px auto;">
+                                    <div class="form-group" v-if="!isRead" style="width: 100%;max-width: 960px;margin: 0px auto;">
                                         <label for="name" class="form-label" style="float: left;">Name</label>
-                                        <input type="text" class="form-control" name="name" placeholder="Name"
-                                            v-model="name" />
+                                        <input type="text" class="form-control" name="name" placeholder="Name" v-model="name" />
                                     </div>
 
-                                    <div class="form-group" v-if="!isRead"
-                                        style="width: 100%;max-width: 960px;margin: 0px auto;">
+                                    <div class="form-group" v-if="!isRead" style="width: 100%;max-width: 960px;margin: 0px auto;">
                                         <label for="title" class="form-label" style="float: left;">Title</label>
-                                        <input type="text" class="form-control" name="title" placeholder="Title"
-                                            v-model="title" />
+                                        <input type="text" class="form-control" name="title" placeholder="Title" v-model="title" />
                                     </div>
 
-                                    <div id="editor"
-                                        style="width: 100%;max-width: 960px;margin: 0 auto;border: 1px #ddd solid;">
+                                    <div id="editor" style="width: 100%;max-width: 960px;margin: 0 auto;border: 1px #ddd solid;">
                                     </div>
 
-                                    <div class="input-group" v-if="!isRead"
-                                        style="width: 100%;max-width: 960px;margin: 0px auto;">
+                                    <div class="input-group" v-if="!isRead" style="width: 100%;max-width: 960px;margin: 0px auto;">
                                         <label class="input-group-text" for="file">Files</label>
                                         <input type="file" class="form-control" name="file[]" id="file" multiple>
                                     </div>
                                 </div>
 
                                 <div class="modal-footer">
-                                    <button id="clickSubmit" class="btn btn-success" onclick="b4_news.clickSubmit()"
-                                        v-if="!isRead">Upload</button>
-                                    <button type="button" class="btn btn-secondary"
-                                        data-bs-dismiss="modal">Close</button>
+                                    <button id="clickSubmit" class="btn btn-success" onclick="b4_news.clickSubmit()" v-if="!isRead">Upload</button>
+                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                                 </div>
                             </div>
                         </div>
@@ -148,72 +133,81 @@ require 'vendor/autoload.php';
                 </div>
 
                 <script>
-                Quill.register({
-                    'modules/better-table': quillBetterTable
-                }, true)
+                    Quill.register({
+                        'modules/better-table': quillBetterTable
+                    }, true)
 
-                var toolbarOptions = [
-                    ['bold', 'italic', 'underline', 'strike'], // toggled buttons
-                    ['blockquote', 'code-block'],
+                    var toolbarOptions = [
+                        ['bold', 'italic', 'underline', 'strike'], // toggled buttons
+                        ['blockquote', 'code-block'],
 
-                    [{
-                        'header': 1
-                    }, {
-                        'header': 2
-                    }], // custom button values
-                    [{
-                        'list': 'ordered'
-                    }, {
-                        'list': 'bullet'
-                    }],
-                    [{
-                        'size': ['small', false, 'large', 'huge']
-                    }], // custom dropdown
-                    ['link', 'image', 'video'], // add's image support
-                    [{
-                        'color': []
-                    }, {
-                        'background': []
-                    }], // dropdown with defaults from theme
-                    [{
-                        'font': []
-                    }],
-                    [{
-                        'align': []
-                    }],
-                    ['clean'] // remove formatting button
-                ];
+                        [{
+                            'header': 1
+                        }, {
+                            'header': 2
+                        }], // custom button values
+                        [{
+                            'list': 'ordered'
+                        }, {
+                            'list': 'bullet'
+                        }],
+                        [{
+                            'size': ['small', false, 'large', 'huge']
+                        }], // custom dropdown
+                        ['link', 'image', 'video'], // add's image support
+                        [{
+                            'color': []
+                        }, {
+                            'background': []
+                        }], // dropdown with defaults from theme
+                        [{
+                            'font': []
+                        }],
+                        [{
+                            'align': []
+                        }],
+                        ['clean'] // remove formatting button
+                    ];
 
-                var quill;
-                $(document).ready(function() {
+                    let quill;
+                    $(document).ready(function() {
 
-                    quill = new Quill('#editor', {
-                        modules: {
-                            toolbar: toolbarOptions,
-                            table: false,
-                            'better-table': {
-                                operationMenu: {
-                                    color: {
-                                        colors: ['rgb(0, 255, 255)', 'rgb(0, 255, 0)',
-                                            'rgb(255, 255, 0)',
-                                            'rgb(255, 128, 0)', 'rgb(255, 0, 0)', 'rgb(255, 0, 255)'
-                                        ],
+                        quill = new Quill('#editor', {
+                            modules: {
+                                toolbar: toolbarOptions,
+                                table: false,
+                                'better-table': {
+                                    operationMenu: {
+                                        color: {
+                                            colors: ['rgb(0, 255, 255)', 'rgb(0, 255, 0)',
+                                                'rgb(255, 255, 0)',
+                                                'rgb(255, 128, 0)', 'rgb(255, 0, 0)', 'rgb(255, 0, 255)'
+                                            ],
+                                        }
                                     }
-                                }
+                                },
                             },
-                        },
-                        theme: 'snow'
+                            theme: 'snow'
+                        });
+
+                        const addTableButton = new QuillToolbarButton({
+                            icon: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Pro 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2022 Fonticons, Inc. --><path d="M64 32C28.7 32 0 60.7 0 96V416c0 35.3 28.7 64 64 64H448c35.3 0 64-28.7 64-64V96c0-35.3-28.7-64-64-64H64zm88 64v64H64V96h88zm56 0h88v64H208V96zm240 0v64H360V96h88zM64 224h88v64H64V224zm232 0v64H208V224h88zm64 0h88v64H360V224zM152 352v64H64V352h88zm56 0h88v64H208V352zm240 0v64H360V352h88z"/></svg>`
+                        })
+                        addTableButton.onClick = function(quill) {
+                            let tableModule = quill.getModule('better-table')
+                            tableModule.insertTable(3, 3)
+                        }
+                        addTableButton.attach(quill);
+
                     });
 
-                });
-
-                var b4_news = Vue.createApp({
-                    data() {
-                        return {
-                            isRead: true,
-                            ItemName: 'NEWS',
-                            data: [
-                                <?php
+                    var b4_news = Vue.createApp({
+                        data() {
+                            return {
+                                isRead: true,
+                                ItemName: 'NEWS',
+                                data: [
+                                    <?php
 
                                     use Symfony\Component\Finder\Finder;
 
@@ -224,82 +218,82 @@ require 'vendor/autoload.php';
                                         echo "{name:'" . $file->getRelativePathname() . "'},";
                                     }
                                     ?>
-                            ]
-                        }
-                    },
-                    methods: {
-                        clickList: function(item) {
+                                ]
+                            }
+                        },
+                        methods: {
+                            clickList: function(item) {
 
-                            this.isRead = true;
-                            $(".ql-toolbar").hide();
+                                this.isRead = true;
+                                $(".ql-toolbar").hide();
 
-                            $.ajax({
-                                url: 'news/' + item.name,
-                                success: function(data) {
+                                $.ajax({
+                                    url: 'news/' + item.name,
+                                    success: function(data) {
+                                        console.log(data);
+                                        quill.root.innerHTML = data;
+
+                                        $('#QuillModal').modal('show')
+                                    }
+                                })
+                            },
+                            plus: function() {
+
+                                this.isRead = false;
+                                $(".ql-toolbar").show();
+                                $('#QuillModal').modal('show')
+
+                            },
+                            clickSubmit: function() {
+
+                                var justHtml = quill.root.innerHTML;
+
+                                var formData = false;
+                                if (window.FormData) {
+                                    formData = new FormData();
+                                }
+                                var filedata = document.getElementById("file"),
+                                    i = 0,
+                                    len = filedata.files.length,
+                                    img, reader, file;
+                                for (; i < len; i++) {
+                                    file = filedata.files[i];
+
+                                    if (window.FileReader) {
+                                        reader = new FileReader();
+                                        reader.onloadend = function(e) {
+                                            //showUploadedItem(...);
+                                        };
+                                        reader.readAsDataURL(file);
+                                    }
+                                    formData.append("file[]", file);
+
+                                }
+                                formData.append("name", this.name);
+                                formData.append("title", this.title);
+                                formData.append("news", justHtml);
+
+                                $.ajax({
+                                    type: "POST",
+                                    url: "editorapi.php",
+                                    data: formData,
+                                    processData: false,
+                                    contentType: false
+                                }).done(function(data) {
                                     console.log(data);
-                                    quill.root.innerHTML = data;
+                                    alert("OK")
 
-                                    $('#QuillModal').modal('show')
-                                }
-                            })
-                        },
-                        plus: function() {
+                                    location.reload();
+                                });
 
-                            this.isRead = false;
-                            $(".ql-toolbar").show();
-                            $('#QuillModal').modal('show')
+                            }
 
                         },
-                        clickSubmit: function() {
-
-                            var justHtml = quill.root.innerHTML;
-
-                            var formData = false;
-                            if (window.FormData) {
-                                formData = new FormData();
-                            }
-                            var filedata = document.getElementById("file"),
-                                i = 0,
-                                len = filedata.files.length,
-                                img, reader, file;
-                            for (; i < len; i++) {
-                                file = filedata.files[i];
-
-                                if (window.FileReader) {
-                                    reader = new FileReader();
-                                    reader.onloadend = function(e) {
-                                        //showUploadedItem(...);
-                                    };
-                                    reader.readAsDataURL(file);
-                                }
-                                formData.append("file[]", file);
-                                
-                            }
-                            formData.append("name", this.name);
-                            formData.append("title", this.title);
-                            formData.append("news", justHtml);
-
-                            $.ajax({
-                                type: "POST",
-                                url: "editorapi.php",
-                                data: formData,
-                                processData: false,
-                                contentType: false
-                            }).done(function(data) {
-                                console.log(data);
-                                alert("OK")
-
-                                location.reload();
-                            });
+                        created: function() {
 
                         }
 
-                    },
-                    created: function() {
-
-                    }
-
-                }).mount('#b4_news');
+                    }).mount('#b4_news');
                 </script>
 
             </div>
@@ -312,45 +306,45 @@ require 'vendor/autoload.php';
     </div>
     <!-- page-wrapper -->
     <script>
-    jQuery(function($) {
+        jQuery(function($) {
 
-        $(".sidebar-dropdown > a").click(function() {
-            $(".sidebar-submenu").slideUp(200);
-            if (
-                $(this)
-                .parent()
-                .hasClass("active")
-            ) {
-                $(".sidebar-dropdown").removeClass("active");
-                $(this)
+            $(".sidebar-dropdown > a").click(function() {
+                $(".sidebar-submenu").slideUp(200);
+                if (
+                    $(this)
                     .parent()
-                    .removeClass("active");
-            } else {
-                $(".sidebar-dropdown").removeClass("active");
-                $(this)
-                    .next(".sidebar-submenu")
-                    .slideDown(200);
-                $(this)
-                    .parent()
-                    .addClass("active");
-            }
-        });
+                    .hasClass("active")
+                ) {
+                    $(".sidebar-dropdown").removeClass("active");
+                    $(this)
+                        .parent()
+                        .removeClass("active");
+                } else {
+                    $(".sidebar-dropdown").removeClass("active");
+                    $(this)
+                        .next(".sidebar-submenu")
+                        .slideDown(200);
+                    $(this)
+                        .parent()
+                        .addClass("active");
+                }
+            });
 
-        $("#close-sidebar").click(function() {
-            $(".page-wrapper").removeClass("toggled");
-        });
-        $("#show-sidebar").click(function() {
-            $(".page-wrapper").addClass("toggled");
-        });
+            $("#close-sidebar").click(function() {
+                $(".page-wrapper").removeClass("toggled");
+            });
+            $("#show-sidebar").click(function() {
+                $(".page-wrapper").addClass("toggled");
+            });
 
-        let $container = $('#container');
+            let $container = $('#container');
 
-        $container.masonry({
-            isFitWidth: true,
-            columnWidth: 5,
-            animate: true
+            $container.masonry({
+                isFitWidth: true,
+                columnWidth: 5,
+                animate: true
+            });
         });
-    });
     </script>
 
 </body>
